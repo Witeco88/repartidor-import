@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111827">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Import">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <title>Repartidor d'import</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Arial, sans-serif;
+      background: #f2f2f7; color: #111827;
+      display: flex; justify-content: center;
+      padding: max(20px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
+    }
+    main { width: 100%; max-width: 480px; padding-top: 28px; }
+    h1 { font-size: 30px; margin: 0 0 8px; }
+    .sub { color: #6b7280; margin: 0 0 24px; }
+    .card {
+      background: white; border-radius: 22px; padding: 22px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.08); margin-bottom: 16px;
+    }
+    label { display:block; font-weight: 600; margin-bottom: 8px; }
+    .input-wrap { position: relative; }
+    input {
+      width: 100%; border: 0; outline: 0; background: #f3f4f6;
+      border-radius: 14px; padding: 16px 52px 16px 16px;
+      font-size: 28px; font-weight: 600;
+    }
+    .currency { position:absolute; right:16px; top:50%; transform:translateY(-50%); color:#6b7280; font-size:20px; }
+    .result {
+      display:flex; justify-content:space-between; align-items:center;
+      padding: 18px 0; border-bottom: 1px solid #e5e7eb;
+    }
+    .result:last-child { border-bottom:0; }
+    .pct { font-size: 16px; color:#6b7280; }
+    .value { font-size: 25px; font-weight: 700; }
+    button {
+      width:100%; border:0; border-radius:14px; padding:15px;
+      background:#111827; color:white; font-size:17px; font-weight:600;
+      margin-top:18px; cursor:pointer;
+    }
+    button:active { transform: scale(.99); }
+    .note { text-align:center; color:#9ca3af; font-size:13px; margin-top:18px; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Repartidor d'import</h1>
+  <p class="sub">Calcula ràpidament el 63,4% i el 36,6%.</p>
+
+  <section class="card">
+    <label for="amount">Import rebut</label>
+    <div class="input-wrap">
+      <input id="amount" type="text" inputmode="decimal" placeholder="0,00" autocomplete="off">
+      <span class="currency">€</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="result">
+      <div class="pct">63,4%</div>
+      <div class="value" id="r634">0,00 €</div>
+    </div>
+    <div class="result">
+      <div class="pct">36,6%</div>
+      <div class="value" id="r366">0,00 €</div>
+    </div>
+    <button id="copy">Copiar resultats</button>
+  </section>
+
+  <div class="note">63,4% + 36,6% = 100%</div>
+</main>
+
+<script>
+const amount = document.getElementById('amount');
+const r634 = document.getElementById('r634');
+const r366 = document.getElementById('r366');
+const copy = document.getElementById('copy');
+
+function parseAmount(v) {
+  v = v.trim().replace(/\s/g,'');
+  if (!v) return 0;
+  // Accept both 1234,56 and 1234.56, plus common thousands separators.
+  if (v.includes(',') && v.includes('.')) {
+    if (v.lastIndexOf(',') > v.lastIndexOf('.')) v = v.replace(/\./g,'').replace(',','.');
+    else v = v.replace(/,/g,'');
+  } else if (v.includes(',')) {
+    v = v.replace(',','.');
+  }
+  return Number(v) || 0;
+}
+function eur(n) {
+  return n.toLocaleString('ca-ES', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' €';
+}
+function calculate() {
+  const n = parseAmount(amount.value);
+  r634.textContent = eur(n * 0.634);
+  r366.textContent = eur(n * 0.366);
+}
+amount.addEventListener('input', calculate);
+
+copy.addEventListener('click', async () => {
+  const n = parseAmount(amount.value);
+  const text = `Import: ${eur(n)}\n63,4%: ${eur(n*0.634)}\n36,6%: ${eur(n*0.366)}`;
+  try {
+    await navigator.clipboard.writeText(text);
+    copy.textContent = 'Copiat ✓';
+    setTimeout(() => copy.textContent = 'Copiar resultats', 1400);
+  } catch {
+    copy.textContent = 'No s’ha pogut copiar';
+    setTimeout(() => copy.textContent = 'Copiar resultats', 1400);
+  }
+});
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js'));
+}
+</script>
+</body>
+</html>
