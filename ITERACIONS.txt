@@ -1,0 +1,19 @@
+10 cicles de millora aplicats sobre la versió anterior:
+1. UX: entrada ràpida + botons +10/+50/+100 i estat de repartiment.
+2. Configuració: percentatge A editable; B sempre completa fins a 100%.
+3. Historial: capacitat ampliada a 200 registres i recuperació amb un toc.
+4. Etiquetes: identificació opcional de cada import.
+5. Cerca i filtres: cerca per import/etiqueta i filtres Avui/7 dies/Tots.
+6. Resum: mètriques acumulades d'imports, total i parts A/B.
+7. Exportació: CSV del registre i resum compartible.
+8. Backup/restore: còpia JSON i restauració local de dades.
+9. Robustesa: confirmació d'esborrat, validacions i format d'import europeu.
+10. PWA: service worker versionat amb eliminació automàtica de caches antics, mode fosc automàtic i UI responsive.
+
+11. Disseny d'icona principal modern: cercle dividit, € central, formes simples.
+12. Icones de navegació redibuixades amb SVG lineal, coherents i nítides en qualsevol pantalla.
+13. PWA reversionada a v23 per forçar actualització i netejar cache antic.
+
+V24 — Grups i salaris: mode salaris nets (percentatges automàtics), mode percentatges directes mantingut, grups de 2 a 10 persones, noms i recuperació de la configuració en l'historial.
+
+V25 — Parts iguals: nou control tipus switch, coherent amb el disseny, que reparteix automàticament l'import a parts iguals entre tots els integrants. Els salaris queden conservats però temporalment no determinen el repartiment mentre l'opció està activa.
