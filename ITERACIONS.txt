@@ -1,29 +1,4 @@
-10 cicles de millora aplicats sobre la versió anterior:
-1. UX: entrada ràpida + botons +10/+50/+100 i estat de repartiment.
-2. Configuració: percentatge A editable; B sempre completa fins a 100%.
-3. Historial: capacitat ampliada a 200 registres i recuperació amb un toc.
-4. Etiquetes: identificació opcional de cada import.
-5. Cerca i filtres: cerca per import/etiqueta i filtres Avui/7 dies/Tots.
-6. Resum: mètriques acumulades d'imports, total i parts A/B.
-7. Exportació: CSV del registre i resum compartible.
-8. Backup/restore: còpia JSON i restauració local de dades.
-9. Robustesa: confirmació d'esborrat, validacions i format d'import europeu.
-10. PWA: service worker versionat amb eliminació automàtica de caches antics, mode fosc automàtic i UI responsive.
 
-11. Disseny d'icona principal modern: cercle dividit, € central, formes simples.
-12. Icones de navegació redibuixades amb SVG lineal, coherents i nítides en qualsevol pantalla.
-13. PWA reversionada a v23 per forçar actualització i netejar cache antic.
+V31 — Eliminació de persones des de la pantalla principal amb icona de paperera discreta. Confirmació abans d’eliminar, mínim de 2 persones mantingut i percentatges restants normalitzats. També es manté l’opció d’eliminar des d’Ajustos.
 
-V24 — Grups i salaris: mode salaris nets (percentatges automàtics), mode percentatges directes mantingut, grups de 2 a 10 persones, noms i recuperació de la configuració en l'historial.
-
-V25 — Parts iguals: nou control tipus switch, coherent amb el disseny, que reparteix automàticament l'import a parts iguals entre tots els integrants. Els salaris queden conservats però temporalment no determinen el repartiment mentre l'opció està activa.
-
-V26 — Redisseny visual basat en la referència aportada: logo circular %, cards de repartiment, accents verd/lila, total destacat, navegació inferior minimalista, light/dark mode i icones SVG/lineals.
-
-V27 — Afegir persones directament des de la pantalla principal: botó «＋ Afegir persona», comptador del grup i límit visible de 10 persones.
-
-V28 — Noms editables directament des de les targetes de persones, amb modal net i botó d’edició. Es recupera i es manté visible el selector «Parts iguals»; quan està actiu, els salaris i percentatges deixen de modificar el repartiment fins que es desactiva.
-
-V29 — Revisió visual final segons el mockup aprovat: icones de navegació i accions amb color, logo % centrat i equilibrat, barra inferior més compacta, targetes de participants més semblants al disseny de referència, botó d’afegir persona integrat al capçal del grup, menú d’opcions per persona i cache del Service Worker actualitzada. S'afegeixen SVG de navegació/accions/equal shares al paquet.
-
-V30 — Revisió d’usabilitat: jerarquia visual simplificada, import rebut com a focus principal, selector de mètode Salaris/Percentatges/Parts iguals visible a la calculadora, targetes de persones més llegibles, accions principals agrupades, barra inferior compacta i icones lineals, logo % centrat, textos més curts, millor contrast i espaiat, i Service Worker v30.
+V32 — Redisseny de la paperera: icona de línia molt fina, estil SF Symbols/iOS, sense contenidor visual permanent, gris discret en repòs i accent vermell només en interacció. Mida visual reduïda mantenint àrea tàctil accessible.

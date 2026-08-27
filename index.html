@@ -113,7 +113,7 @@ nav button{border:0;background:transparent;color:var(--muted);padding:4px 2px 3p
 <div class="card"><div class="sectionhead"><h2>Configuració</h2></div>
 <div class="setting"><span>Mode de repartiment<small>Percentatges directes o segons salaris nets</small></span><select id="mode"><option value="salary">Segons salaris</option><option value="percent">Percentatges</option></select></div></div>
 <div class="card" id="salaryCard"><div class="sectionhead"><h2>Grup</h2><button class="linkbtn" id="addPerson">＋ Afegir</button></div>
-<div class="setting"><span>Persones<small>Entre 2 i 10 persones</small></span><b id="peopleCount">2</b></div>
+<div class="setting"><span>Persones<small>Entre 2 i 10 persones · pots eliminar-ne qualsevol després d’afegir-la</small></span><b id="peopleCount">2</b></div>
 <div id="peopleList"></div>
 <div class="equalShare">
   <div class="equalCopy"><div class="equalIcon">≡</div><div class="equalText"><b>Parts iguals</b><small>Reparteix l’import a parts iguals entre tots</small></div></div>
@@ -152,7 +152,10 @@ function saveCfg(){localStorage.setItem('cfg',JSON.stringify(cfg))}
 function getH(){try{return JSON.parse(localStorage.getItem('history')||'[]')}catch{return[]}}
 function setH(h){localStorage.setItem('history',JSON.stringify(h.slice(0,200)))}
 function getPercentages(){if(cfg.equalShares)return cfg.people.map(()=>100/cfg.people.length);if(cfg.mode==='salary'){let t=cfg.people.reduce((s,p)=>s+Math.max(0,Number(p.salary)||0),0);return t?cfg.people.map(p=>Math.max(0,Number(p.salary)||0)/t*100):cfg.people.map(()=>100/cfg.people.length)}let v=cfg.percentages.map(x=>Math.max(0,Number(x)||0)),t=v.reduce((a,b)=>a+b,0);return t?v.map(x=>x/t*100):v.map(()=>100/v.length)}
-function calc(){let n=parse($('amount').value),ps=getPercentages();updateMethodUI();$('resultRows').innerHTML='<div class="result-grid">'+cfg.people.map((p,i)=>{let tone=i%2?'purple':'teal';return `<div class="shareCard"><div class="shareTop"><span class="sharePct ${tone}">${pct(ps[i])}</span></div><div class="personIcon ${tone==='purple'?'purple':''}"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.7-4 2.9-6 6.5-6s5.8 2 6.5 6"/></svg></div><div class="shareName"><button class="editName" data-edit-name="${i}" aria-label="Canviar nom">${esc(p.name||'Persona '+(i+1))} <span>✎</span></button></div><div class="shareValue">${fmt(n*ps[i]/100)}</div><button class="personMenu" data-person-menu="${i}" aria-label="Opcions">⋮</button></div>`}).join('')+'</div>';$('total').textContent=fmt(n);$('groupCount').textContent=cfg.people.length+' de 10 persones';$('addPersonMain').disabled=cfg.people.length>=10;$addPersonMainStyle();$('subtitle').textContent=cfg.mode==='salary'?'Segons salaris · '+cfg.people.length+' persones':ps.map(pct).join(' · ');$('check').textContent=Math.abs(ps.reduce((a,b)=>a+b,0)-100)<.001?'Quadrat ✓':'Revisa el repartiment';renderSettings()}
+function calc(){let n=parse($('amount').value),ps=getPercentages();updateMethodUI();$('resultRows').innerHTML='<div class="result-grid">'+cfg.people.map((p,i)=>{let tone=i%2?'purple':'teal';return `<div class="shareCard"><div class="shareTop"><span class="sharePct ${tone}">${pct(ps[i])}</span></div><div class="personIcon ${tone==='purple'?'purple':''}"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.7-4 2.9-6 6.5-6s5.8 2 6.5 6"/></svg></div><div class="shareName"><button class="editName" data-edit-name="${i}" aria-label="Canviar nom">${esc(p.name||'Persona '+(i+1))} <span>✎</span></button></div><div class="shareValue">${fmt(n*ps[i]/100)}</div><button class="removeCardPerson" data-remove-card="${i}" aria-label="Eliminar persona" title="Eliminar persona">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5.5 7.5h13M9.2 7.5V5.2c0-.7.5-1.2 1.2-1.2h3.2c.7 0 1.2.5 1.2 1.2v2.3M7.4 7.5l.8 12.1c.1.8.7 1.4 1.5 1.4h4.6c.8 0 1.4-.6 1.5-1.4l.8-12.1M10.2 10.8v6.2M13.8 10.8v6.2"/>
+</svg></button></div>`}).join('')+'</div>';$('total').textContent=fmt(n);$('groupCount').textContent=cfg.people.length+' de 10 persones';$('addPersonMain').disabled=cfg.people.length>=10;$addPersonMainStyle();$('subtitle').textContent=cfg.mode==='salary'?'Segons salaris · '+cfg.people.length+' persones':ps.map(pct).join(' · ');$('check').textContent=Math.abs(ps.reduce((a,b)=>a+b,0)-100)<.001?'Quadrat ✓':'Revisa el repartiment';renderSettings()}
 function toast(t){let x=$('toast');x.textContent=t;x.classList.add('show');setTimeout(()=>x.classList.remove('show'),1600)}
 function resultText(n){let ps=getPercentages();return `Import rebut: ${fmt(n)}\n`+cfg.people.map((p,i)=>`${p.name||'Persona '+(i+1)} (${pct(ps[i])}): ${fmt(n*ps[i]/100)}`).join('\n')}
 function renderSettings(){let ps=getPercentages();$('mode').value=cfg.mode;$('equalShares').checked=!!cfg.equalShares;$('salaryCard').classList.toggle('modeHidden',cfg.mode!=='salary');$('percentCard').classList.toggle('modeHidden',cfg.mode!=='percent');$('peopleCount').textContent=cfg.people.length;let total=cfg.people.reduce((s,p)=>s+(Number(p.salary)||0),0);$('salaryTotal').textContent=fmt(total);$('salaryCheck').textContent=cfg.equalShares?'✓ L’import es repartirà a parts iguals':(total>0?'✓ Percentatges calculats a partir dels salaris':'○ Introdueix els salaris per calcular els percentatges');
@@ -161,7 +164,18 @@ $('percentList').innerHTML=cfg.people.map((p,i)=>`<div class="percentRow"><div>$
 document.querySelectorAll('[data-name]').forEach(x=>x.onchange=()=>{let i=+x.dataset.name;cfg.people[i].name=x.value.trim()||'Persona '+(i+1);saveCfg();calc()});
 document.querySelectorAll('[data-salary]').forEach(x=>x.onchange=()=>{cfg.people[+x.dataset.salary].salary=parse(x.value);saveCfg();calc()});
 document.querySelectorAll('[data-pct]').forEach(x=>x.onchange=()=>{cfg.percentages[+x.dataset.pct]=Math.max(0,parse(x.value));saveCfg();calc()});
-document.querySelectorAll('[data-remove]').forEach(x=>x.onclick=()=>{if(cfg.people.length<=2){toast('Mínim 2 persones');return}let i=+x.dataset.remove;cfg.people.splice(i,1);cfg.percentages.splice(i,1);if(cfg.people.length)cfg.percentages=cfg.people.map(()=>100/cfg.people.length);saveCfg();calc();toast('Persona eliminada')})}
+document.querySelectorAll('[data-remove]').forEach(x=>x.onclick=()=>removePerson(+x.dataset.remove))}
+function removePerson(i){
+ if(cfg.people.length<=2){toast('Calen almenys 2 persones');return}
+ const name=cfg.people[i]?.name||('Persona '+(i+1));
+ if(!confirm('Eliminar '+name+'?'))return;
+ cfg.people.splice(i,1);
+ cfg.percentages.splice(i,1);
+ let total=cfg.percentages.reduce((a,b)=>a+Math.max(0,Number(b)||0),0);
+ cfg.percentages=cfg.people.map((_,j)=>total?Math.max(0,Number(cfg.percentages[j])||0)/total*100:100/cfg.people.length);
+ saveCfg();calc();toast('Persona eliminada ✓');
+}
+
 $('amount').addEventListener('input',calc);
 document.querySelectorAll('[data-add]').forEach(b=>b.onclick=()=>{$('amount').value=String(parse($('amount').value)+Number(b.dataset.add)).replace('.',',');calc()});
 $('clearInput').onclick=$('reset').onclick=()=>{$('amount').value='';calc();$('amount').focus()};
@@ -230,8 +244,13 @@ cfg.people=Array.isArray(cfg.people)&&cfg.people.length>=2?cfg.people.slice(0,10
 function show(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));window.scrollTo(0,0)}
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>show(b.dataset.page));$('settingsTop').onclick=()=>show('settingsPage');
 calc();render();renderStats();
-document.addEventListener('click',e=>{let b=e.target.closest('[data-edit-name]');if(b)openNameEditor(Number(b.dataset.editName))});
+document.addEventListener('click',e=>{
+ let b=e.target.closest('[data-edit-name]');
+ if(b)openNameEditor(Number(b.dataset.editName));
+ let r=e.target.closest('[data-remove-card]');
+ if(r)removePerson(Number(r.dataset.removeCard));
+});
 
 
-if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js?v=30'));
+if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js?v=32'));
 </script></body></html>
