@@ -17,3 +17,9 @@
 V24 — Grups i salaris: mode salaris nets (percentatges automàtics), mode percentatges directes mantingut, grups de 2 a 10 persones, noms i recuperació de la configuració en l'historial.
 
 V25 — Parts iguals: nou control tipus switch, coherent amb el disseny, que reparteix automàticament l'import a parts iguals entre tots els integrants. Els salaris queden conservats però temporalment no determinen el repartiment mentre l'opció està activa.
+
+V26 — Redisseny visual basat en la referència aportada: logo circular %, cards de repartiment, accents verd/lila, total destacat, navegació inferior minimalista, light/dark mode i icones SVG/lineals.
+
+V27 — Afegir persones directament des de la pantalla principal: botó «＋ Afegir persona», comptador del grup i límit visible de 10 persones.
+
+V28 — Noms editables directament des de les targetes de persones, amb modal net i botó d’edició. Es recupera i es manté visible el selector «Parts iguals»; quan està actiu, els salaris i percentatges deixen de modificar el repartiment fins que es desactiva.
