@@ -1,1 +1,23 @@
-{"name":"Repartidor d'import","short_name":"Repartidor","start_url":"./","display":"standalone","background_color":"#f5f7fb","theme_color":"#0f172a","lang":"ca","icons":[{"src":"icon-180.png","sizes":"180x180","type":"image/png","purpose":"any maskable"},{"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]}
+{
+  "name": "Repartidor",
+  "short_name": "Repartidor",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f7f8fb",
+  "theme_color": "#08a978",
+  "lang": "ca",
+  "icons": [
+    {
+      "src": "icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
