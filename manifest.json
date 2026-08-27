@@ -3,8 +3,8 @@
   "short_name": "Repartidor",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#f7f8fb",
-  "theme_color": "#08a978",
+  "background_color": "#f5f7fa",
+  "theme_color": "#0aa77b",
   "lang": "ca",
   "icons": [
     {
@@ -19,5 +19,6 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  "description": "Calcula i reparteix imports de manera senzilla"
 }

@@ -25,3 +25,5 @@ V27 — Afegir persones directament des de la pantalla principal: botó «＋ Af
 V28 — Noms editables directament des de les targetes de persones, amb modal net i botó d’edició. Es recupera i es manté visible el selector «Parts iguals»; quan està actiu, els salaris i percentatges deixen de modificar el repartiment fins que es desactiva.
 
 V29 — Revisió visual final segons el mockup aprovat: icones de navegació i accions amb color, logo % centrat i equilibrat, barra inferior més compacta, targetes de participants més semblants al disseny de referència, botó d’afegir persona integrat al capçal del grup, menú d’opcions per persona i cache del Service Worker actualitzada. S'afegeixen SVG de navegació/accions/equal shares al paquet.
+
+V30 — Revisió d’usabilitat: jerarquia visual simplificada, import rebut com a focus principal, selector de mètode Salaris/Percentatges/Parts iguals visible a la calculadora, targetes de persones més llegibles, accions principals agrupades, barra inferior compacta i icones lineals, logo % centrat, textos més curts, millor contrast i espaiat, i Service Worker v30.
