@@ -5,7 +5,6 @@
   "display": "standalone",
   "background_color": "#f5f7fa",
   "theme_color": "#0aa77b",
-  "lang": "ca",
   "icons": [
     {
       "src": "icon-180.png",
@@ -19,6 +18,5 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ],
-  "description": "Calcula i reparteix imports de manera senzilla"
+  ]
 }

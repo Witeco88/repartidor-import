@@ -68,15 +68,23 @@ nav button{border:0;background:transparent;color:var(--muted);padding:4px 2px 3p
 .toast{position:fixed;left:50%;bottom:66px;transform:translate(-50%,12px);background:#17202a;color:#fff;padding:9px 13px;border-radius:10px;font-size:11px;opacity:0;pointer-events:none;transition:.2s;z-index:8}.toast.show{opacity:1;transform:translate(-50%,0)}
 @media(max-width:390px){main{padding-left:12px;padding-right:12px}.result-grid{gap:6px}.shareCard{padding:10px 9px}.sharePct{font-size:18px}.shareValue{font-size:16px}.inputwrap input{font-size:29px}}
 @media(min-width:700px){main{padding-top:30px}}
+
+/* Ticket scanner v33 */
+.scanEntry{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px;padding:10px 11px;border:1px solid var(--line);border-radius:13px;background:var(--soft)}
+.scanEntryCopy{display:flex;align-items:center;gap:9px;min-width:0}.scanEntryIcon{width:32px;height:32px;border-radius:10px;background:var(--blue);color:#fff;display:grid;place-items:center;flex:none}.scanEntryIcon svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.scanEntry b{display:block;font-size:12px}.scanEntry small{display:block;color:var(--muted);font-size:10px;margin-top:2px}.scanBtn{border:0;background:var(--card);color:var(--blue);border-radius:10px;padding:8px 10px;font-size:11px;font-weight:800;white-space:nowrap}
+.ticketHero{overflow:hidden}.ticketPreview{display:none;width:100%;max-height:260px;object-fit:contain;border-radius:13px;background:var(--soft);margin-top:10px}.ticketPreview.show{display:block}.scanStatus{font-size:11px;color:var(--muted);padding:9px 0 2px}.scanStatus.ok{color:var(--ok)}.scanStatus.error{color:var(--danger)}
+.ticketRows{margin-top:10px}.ticketRow{border:1px solid var(--line);border-radius:13px;padding:10px;margin-bottom:7px;background:var(--card)}.ticketMain{display:grid;grid-template-columns:minmax(0,1fr) 88px;gap:7px;align-items:center}.ticketMain input{width:100%;border:0;background:var(--soft);color:var(--text);border-radius:9px;padding:9px;font-size:12px}.ticketMain input:focus{outline:2px solid var(--accent);background:var(--card)}.ticketAmount{text-align:right;font-weight:800}.assignLabel{font-size:9px;color:var(--muted);margin:7px 0 5px}.assignChips{display:flex;gap:5px;flex-wrap:wrap}.assignChip{border:1px solid var(--line);background:var(--soft);color:var(--muted);border-radius:8px;min-width:29px;padding:6px 7px;font-size:10px;font-weight:800}.assignChip.active{background:var(--accent-soft);border-color:transparent;color:var(--accent)}.ticketMeta{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.ticketStat{background:var(--soft);border-radius:11px;padding:10px}.ticketStat small{display:block;color:var(--muted);font-size:9px}.ticketStat b{display:block;font-size:14px;margin-top:3px}.ticketDiff{font-size:10px;margin-top:7px;text-align:right;color:var(--muted)}.ticketDiff.warn{color:var(--danger)}.ticketActions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.ticketActions button{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:11px;padding:10px;font-size:11px;font-weight:800}.ticketActions .primary{background:var(--accent);border-color:transparent;color:#fff}.ticketEmpty{padding:22px 8px;text-align:center;color:var(--muted);font-size:11px}.ticketHint{font-size:10px;color:var(--muted);line-height:1.45;margin-top:8px}.ticketCamera{width:100%;padding:13px;border:1px dashed var(--line);border-radius:13px;background:var(--soft);color:var(--text);font-weight:800;font-size:12px}
+@media(max-width:390px){.ticketMain{grid-template-columns:minmax(0,1fr) 82px}}
 </style></head>
 <body><main>
-<header><div class="brand"><div class="logo" aria-label="Repartidor"></div><div><h1>Repartidor</h1><p class="sub" id="subtitle">63,4% · 36,6%</p></div></div><button class="topbtn" id="settingsTop" aria-label="Ajustos"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.5-2.3 1a8 8 0 0 0-1.8-1L14.5 3h-4l-.3 3a8 8 0 0 0-1.8 1l-2.3-1-2 3.5 2 1.5a7 7 0 0 0 0 2l-2 1.5 2 3.5 2.3-1a8 8 0 0 0 1.8 1l.3 3h4l.3-3a8 8 0 0 0 1.8-1l2.3 1 2-3.5-2-1.5c.1-.3.1-.7.1-1Z"/></svg></button></header>
+<header><div class="brand"><div class="logo" aria-label="Repartidor"></div><div><h1>Repartidor</h1><p class="sub" id="subtitle">63,4% · 36,6%</p></div></div></header>
 
 <section id="calcPage" class="page active">
 <div class="card amountCard">
   <div class="label">Import rebut</div>
   <div class="inputwrap"><input id="amount" inputmode="decimal" type="text" placeholder="0,00" autocomplete="off"><span class="euro">€</span></div>
   <div class="quick"><button data-add="10">+10 €</button><button data-add="50">+50 €</button><button data-add="100">+100 €</button><button id="clearInput" style="display:none">⌫</button></div>
+  <div class="scanEntry"><div class="scanEntryCopy"><div class="scanEntryIcon"><svg viewBox="0 0 24 24"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h4a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/><path d="M7 12h10M12 7v10"/></svg></div><div><b>Escanejar tiquet</b><small>Foto → conceptes → repartiment</small></div></div><button class="scanBtn" id="scanTicket">Obrir</button></div>
 </div>
 
 <div class="card">
@@ -100,6 +108,25 @@ nav button{border:0;background:transparent;color:var(--muted);padding:4px 2px 3p
 </div>
 </section>
 
+<section id="ticketPage" class="page">
+<div class="card ticketHero">
+  <div class="sectionhead"><h2>Escanejar tiquet</h2><button class="linkbtn" id="ticketBack">Tornar</button></div>
+  <div class="ticketHint">Fes una foto clara i frontal. La v33 llegeix les línies amb imports i després et deixa assignar cada concepte a una o més persones.</div>
+  <input id="ticketFile" type="file" accept="image/*" capture="environment" hidden>
+  <button class="ticketCamera" id="ticketChoose">📷 Fer foto o triar imatge</button>
+  <img id="ticketPreview" class="ticketPreview" alt="Previsualització del tiquet">
+  <div id="scanStatus" class="scanStatus">Encara no has seleccionat cap tiquet.</div>
+</div>
+<div class="card" id="ticketEditorCard" style="display:none">
+  <div class="sectionhead"><h2>Revisa i assigna</h2><button class="linkbtn" id="ticketAddRow">＋ Línia</button></div>
+  <div class="ticketHint">Selecciona A, B, C… per indicar qui paga cada línia. Pots seleccionar més d'una persona per dividir un producte a parts iguals.</div>
+  <div id="ticketRows" class="ticketRows"></div>
+  <div class="ticketMeta"><div class="ticketStat"><small>Conceptes</small><b id="ticketItemsTotal">0,00 €</b></div><div class="ticketStat"><small>Total detectat</small><b id="ticketDetectedTotal">—</b></div></div>
+  <div id="ticketDiff" class="ticketDiff"></div>
+  <div class="ticketActions"><button id="ticketReset">Netejar</button><button class="primary" id="ticketApply">Aplicar al repartiment</button></div>
+</div>
+<div class="card" id="ticketEmptyCard"><div class="ticketEmpty">Quan carreguis una foto, aquí apareixeran les línies detectades.</div></div>
+</section>
 <section id="historyPage" class="page"><div class="card"><div class="sectionhead"><h2>Historial</h2><button class="linkbtn" id="clearHistory">Esborrar tot</button></div>
 <input class="search" id="search" placeholder="Cerca import o etiqueta…"><div class="filterbar"><button class="chip active" data-filter="all">Tots</button><button class="chip" data-filter="today">Avui</button><button class="chip" data-filter="week">7 dies</button></div>
 <div id="history"></div></div></section>
@@ -136,6 +163,7 @@ nav button{border:0;background:transparent;color:var(--muted);padding:4px 2px 3p
 <div class="modal nameModal" id="nameModal"><div class="sheet"><h2>Canviar nom</h2><input id="nameInput" type="text" maxlength="30" placeholder="Nom de la persona"><div class="sheetgrid"><button id="closeName">Cancel·lar</button><button class="primary" id="saveName">Desar</button></div></div></div>
 <div class="modal" id="labelModal"><div class="sheet"><h2>Guardar import</h2><div class="sheetgrid"><input id="labelInput" placeholder="Etiqueta opcional"><button class="primary" id="saveLabeled">Guardar</button></div><button id="closeModal">Cancel·lar</button></div></div>
 
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <script>
 const $=id=>document.getElementById(id);
 const defaults={mode:'salary',equalShares:false,people:[{name:'Persona 1',salary:0},{name:'Persona 2',salary:0}],percentages:[50,50],decimals:2,confirmDelete:true};
@@ -144,6 +172,7 @@ cfg.equalShares=!!cfg.equalShares;
 cfg.people=Array.isArray(cfg.people)&&cfg.people.length>=2?cfg.people.slice(0,10):defaults.people;
 cfg.percentages=Array.isArray(cfg.percentages)&&cfg.percentages.length===cfg.people.length?cfg.percentages:cfg.people.map(()=>100/cfg.people.length);
 let activeFilter='all',pending=null;
+let ticketRows=[],ticketDetectedTotal=null,ticketObjectUrl=null;
 function parse(v){v=String(v??'').trim().replace(/\s/g,'');if(!v)return 0;if(v.includes(',')&&v.includes('.'))v=v.lastIndexOf(',')>v.lastIndexOf('.')?v.replace(/\./g,'').replace(',','.'):v.replace(/,/g,'');else if(v.includes(','))v=v.replace(',','.');return Number(v)||0}
 function pct(n){return n.toLocaleString('ca-ES',{minimumFractionDigits:1,maximumFractionDigits:1})+'%'}
 function fmt(n){return n.toLocaleString('ca-ES',{minimumFractionDigits:Number(cfg.decimals),maximumFractionDigits:Number(cfg.decimals)})+' €'}
@@ -241,6 +270,70 @@ $('backup').onclick=()=>{download('repartidor-backup.json','application/json',JS
 $('restoreBtn').onclick=()=>$('restoreFile').click();
 $('restoreFile').onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let d=JSON.parse(r.result);if(!Array.isArray(d.history))throw 0;localStorage.setItem('history',JSON.stringify(d.history));if(d.cfg){cfg={...defaults,...d.cfg};cfg.equalShares=!!cfg.equalShares;
 cfg.people=Array.isArray(cfg.people)&&cfg.people.length>=2?cfg.people.slice(0,10):defaults.people;cfg.percentages=Array.isArray(cfg.percentages)&&cfg.percentages.length===cfg.people.length?cfg.percentages:cfg.people.map(()=>100/cfg.people.length);saveCfg()}calc();render();renderStats();toast('Dades importades ✓')}catch{toast('Fitxer no vàlid')}};r.readAsText(f)};
+
+function ticketPersonLabels(){return cfg.people.map((p,i)=>({i,label:String.fromCharCode(65+i),name:p.name||('Persona '+(i+1))}))}
+function parseTicketAmount(v){return parse(v)}
+function cleanTicketName(v){return String(v).replace(/\s+/g,' ').replace(/^[\-–—•*\s]+/,'').trim()}
+function parseTicketOCR(text){
+ const lines=String(text||'').split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+ const money=/(-?\d{1,4}(?:[.\s]\d{3})*(?:[,.]\d{2})|-?\d+[,.]\d{2})\s*€?\s*$/;
+ const totalRx=/\b(total|total a pagar|importe total|subtotal|iva|i\.v\.a|tax|vat|propina|tip|cambio|cash|efectivo|tarjeta|card|pagado|descuento)\b/i;
+ const rows=[]; let detected=null;
+ for(const raw of lines){
+   const m=raw.match(money); if(!m) continue;
+   const amount=parseTicketAmount(m[1]); if(!amount) continue;
+   const name=cleanTicketName(raw.slice(0,m.index));
+   if(totalRx.test(raw)){
+      if(/\b(total|total a pagar|importe total)\b/i.test(raw) && !/subtotal/i.test(raw)) detected=amount;
+      continue;
+   }
+   if(!name || name.length<2) continue;
+   // Ignore likely page numbers and pure quantities.
+   if(/^\d+[xX]?$/.test(name)) continue;
+   rows.push({id:Date.now()+rows.length,name,amount,people:[]});
+ }
+ return {rows:rows.slice(0,80),detectedTotal:detected};
+}
+function renderTicketRows(){
+ const el=$('ticketRows'),labels=ticketPersonLabels();
+ if(!ticketRows.length){el.innerHTML='<div class="ticketEmpty">No s’han detectat línies amb imports. Pots afegir-les manualment.</div>';}
+ else el.innerHTML=ticketRows.map((r,i)=>`<div class="ticketRow" data-ticket-row="${i}"><div class="ticketMain"><input class="ticketNameInput" data-ticket-name="${i}" value="${esc(r.name)}"><input class="ticketAmount" data-ticket-amount="${i}" inputmode="decimal" value="${String(r.amount).replace('.',',')}"></div><div class="assignLabel">Qui ho paga?</div><div class="assignChips">${labels.map(x=>`<button class="assignChip ${r.people.includes(x.i)?'active':''}" data-ticket-person="${i}:${x.i}" title="${esc(x.name)}">${x.label}</button>`).join('')}<button class="assignChip ${r.people.length===labels.length?'active':''}" data-ticket-all="${i}">Tots</button></div></div>`).join('');
+ document.querySelectorAll('[data-ticket-name]').forEach(x=>x.oninput=()=>{ticketRows[+x.dataset.ticketName].name=x.value});
+ document.querySelectorAll('[data-ticket-amount]').forEach(x=>x.oninput=()=>{ticketRows[+x.dataset.ticketAmount].amount=parseTicketAmount(x.value);updateTicketTotals()});
+ document.querySelectorAll('[data-ticket-person]').forEach(x=>x.onclick=()=>{let [ri,pi]=x.dataset.ticketPerson.split(':').map(Number);let a=ticketRows[ri].people;if(a.includes(pi))ticketRows[ri].people=a.filter(v=>v!==pi);else a.push(pi);renderTicketRows();updateTicketTotals()});
+ document.querySelectorAll('[data-ticket-all]').forEach(x=>x.onclick=()=>{let i=+x.dataset.ticketAll;ticketRows[i].people=ticketRows[i].people.length===labels.length?[]:labels.map(v=>v.i);renderTicketRows();updateTicketTotals()});
+ updateTicketTotals();
+}
+function updateTicketTotals(){
+ const sum=ticketRows.reduce((s,r)=>s+(Number(r.amount)||0),0);$('ticketItemsTotal').textContent=fmt(sum);$('ticketDetectedTotal').textContent=ticketDetectedTotal==null?'—':fmt(ticketDetectedTotal);const diff=ticketDetectedTotal==null?0:ticketDetectedTotal-sum;const d=$('ticketDiff');if(ticketDetectedTotal==null){d.textContent='El total del tiquet no s’ha pogut detectar; es farà servir la suma dels conceptes.';d.classList.remove('warn')}else if(Math.abs(diff)<0.01){d.textContent='✓ Les línies coincideixen amb el total detectat';d.classList.remove('warn')}else{d.textContent=`Diferència: ${fmt(diff)} · es distribuirà proporcionalment en aplicar`;d.classList.add('warn')}}
+function setTicketStatus(t,kind=''){const x=$('scanStatus');x.textContent=t;x.className='scanStatus '+kind}
+async function runTicketOCR(file){
+ if(!window.Tesseract){setTicketStatus('No s’ha pogut carregar el lector OCR. Pots introduir les línies manualment.','error');return}
+ setTicketStatus('Llegint el tiquet…');
+ try{
+   const result=await Tesseract.recognize(file,'eng',{logger:m=>{if(m.status==='recognizing text'&&typeof m.progress==='number')setTicketStatus(`Llegint el tiquet… ${Math.round(m.progress*100)}%`)}});
+   const parsed=parseTicketOCR(result.data.text);ticketRows=parsed.rows;ticketDetectedTotal=parsed.detectedTotal;
+   $('ticketEditorCard').style.display='block';$('ticketEmptyCard').style.display='none';renderTicketRows();
+   setTicketStatus(ticketRows.length?`${ticketRows.length} línies detectades. Revisa-les abans d’aplicar.`:'No s’han detectat línies amb imports. Afegeix-les manualment.','ok');
+ }catch(e){console.error(e);setTicketStatus('No s’ha pogut llegir la imatge. Pots introduir les línies manualment.','error');$('ticketEditorCard').style.display='block';$('ticketEmptyCard').style.display='none';renderTicketRows()}
+}
+function resetTicket(){ticketRows=[];ticketDetectedTotal=null;$('ticketEditorCard').style.display='none';$('ticketEmptyCard').style.display='block';$('ticketPreview').classList.remove('show');$('ticketPreview').removeAttribute('src');if(ticketObjectUrl)URL.revokeObjectURL(ticketObjectUrl);ticketObjectUrl=null;setTicketStatus('Encara no has seleccionat cap tiquet.')}
+$('scanTicket').onclick=()=>show('ticketPage');
+$('ticketBack').onclick=()=>show('calcPage');
+$('ticketChoose').onclick=()=>$('ticketFile').click();
+$('ticketFile').onchange=()=>{const f=$('ticketFile').files?.[0];if(!f)return;if(ticketObjectUrl)URL.revokeObjectURL(ticketObjectUrl);ticketObjectUrl=URL.createObjectURL(f);$('ticketPreview').src=ticketObjectUrl;$('ticketPreview').classList.add('show');$('ticketEditorCard').style.display='block';$('ticketEmptyCard').style.display='none';ticketRows=[];ticketDetectedTotal=null;renderTicketRows();runTicketOCR(f)};
+$('ticketAddRow').onclick=()=>{ticketRows.push({id:Date.now()+ticketRows.length,name:'Nou concepte',amount:0,people:[]});renderTicketRows();setTicketStatus('Línia afegida. Assigna-la a una persona.')};
+$('ticketReset').onclick=resetTicket;
+$('ticketApply').onclick=()=>{
+ const n=cfg.people.length; if(!ticketRows.length){toast('No hi ha conceptes');return}
+ const unassigned=ticketRows.some(r=>!r.people.length);if(unassigned){toast('Assigna tots els conceptes');return}
+ const base=ticketRows.reduce((s,r)=>s+(Number(r.amount)||0),0);const total=ticketDetectedTotal!=null?ticketDetectedTotal:base;
+ if(!total){toast('El total és 0,00 €');return}
+ const shares=Array(n).fill(0);
+ ticketRows.forEach(r=>{const part=(Number(r.amount)||0)/Math.max(1,r.people.length);r.people.forEach(i=>shares[i]+=part)});
+ const shareBase=shares.reduce((a,b)=>a+b,0);const factor=shareBase?total/shareBase:1;const finalShares=shares.map(x=>x*factor);cfg.mode='percent';cfg.equalShares=false;cfg.percentages=finalShares.map(x=>x/total*100);saveCfg();$('amount').value=String(total).replace('.',',');calc();show('calcPage');toast('Tiquet aplicat ✓');
+};
+
 function show(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));window.scrollTo(0,0)}
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>show(b.dataset.page));$('settingsTop').onclick=()=>show('settingsPage');
 calc();render();renderStats();
@@ -252,5 +345,12 @@ document.addEventListener('click',e=>{
 });
 
 
-if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js?v=32'));
+if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js?v=34'));
 </script></body></html>
+<style>
+/* v34: Settings is accessed only from the compact bottom navigation. */
+header [data-page="settings"], .header [data-page="settings"], .topbar [data-page="settings"],
+.topActions [data-page="settings"], .topSettings { display:none !important; }
+/* Cleaner iOS-like settings icon: three sliders, not a literal gear. */
+.gearIcon{width:22px;height:22px}
+</style>

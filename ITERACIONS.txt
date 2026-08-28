@@ -1,4 +1,3 @@
+V33 — Escaneig de tiquets: captura de foto, OCR client-side, parser de línies/imports, revisió editable, assignació A/B/C… i integració amb el repartiment.
 
-V31 — Eliminació de persones des de la pantalla principal amb icona de paperera discreta. Confirmació abans d’eliminar, mínim de 2 persones mantingut i percentatges restants normalitzats. També es manté l’opció d’eliminar des d’Ajustos.
-
-V32 — Redisseny de la paperera: icona de línia molt fina, estil SF Symbols/iOS, sense contenidor visual permanent, gris discret en repòs i accent vermell només en interacció. Mida visual reduïda mantenint àrea tàctil accessible.
+V34 — Ajustos: eliminat l'accés superior dret perquè Ajustos ja és accessible des de la barra inferior. Substituïda la icona d'engranatge per una icona minimalista de tres controls lliscants, més coherent amb l'estètica iOS de l'app.
